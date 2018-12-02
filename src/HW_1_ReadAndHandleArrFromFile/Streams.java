@@ -66,18 +66,24 @@ public class Streams {
         System.out.println(persons);
         System.out.println(skip);
 
-//        System.out.println("------Change all elements with MAP------------------");
-//
-//        List<Person> mappedPersons = persons.stream()
-//                .map(person -> person.getId()+10000)
-//                //.sorted(Comparator.comparing(Person::getName))
-//                .collect(Collectors.toList());
+        System.out.println("------Change all elements with MAP, works with primitives------------------");
 
-//        System.out.println("-----------------Peek----------------");
-//
-//        List<Person> list = persons.stream()
-//                .peek(person -> person.getId()+1000)
-//                .collect(Collectors.toList());
+        List<String> numbers = Arrays.asList("1", "2", "3", "4", "5", "6");
+        List<Integer> even = numbers.stream()
+                .map(s -> Integer.valueOf(s))
+                .filter(number -> number % 2 == 0)
+                .collect(Collectors.toList());
+        System.out.println("even- "+ even);
+
+
+        System.out.println("-----------------Peek works as a cycle ----------------");
+
+        Stream.of("bus", "car", "bycle", "flight", "train")
+                .filter(e -> e.length() > 3)
+                .peek(e -> System.out.println("Filtered value: " + e))
+                .map(String::toUpperCase)
+                .peek(e -> System.out.println("Mapped value: " + e))
+                .collect(Collectors.toList());
 
         System.out.println("---------------Limit-------------");
 
